@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="46.563885mm"
+   height="42.408459mm"
+   viewBox="0 0 46.563885 42.408459"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="New Google Ads Logo.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-574.8624"
+     inkscape:cy="-68.429463"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1358"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-74.235915,-88.31958)">
+    <g
+       id="g3719"
+       transform="matrix(0.26458333,0,0,0.26458333,72.116602,85.22235)">
+      <rect
+         id="rect3713"
+         height="58.669998"
+         width="117.33"
+         transform="matrix(0.5,-0.866,0.866,0.5,-46.2127,103.666)"
+         y="62.52"
+         x="8"
+         style="fill:#fbbc04" />
+      <path
+         id="path3715"
+         d="M 180.07,127.99 121.4,26.38 C 113.3,12.35 95.36,7.54 81.33,15.64 67.3,23.74 62.49,41.68 70.59,55.71 l 58.67,101.61 c 8.1,14.03 26.04,18.83 40.07,10.74 14.03,-8.1 18.83,-26.04 10.74,-40.07 z"
+         inkscape:connector-curvature="0"
+         style="fill:#4285f4" />
+      <circle
+         id="circle3717"
+         r="29.33"
+         cy="142.66"
+         cx="37.34"
+         style="fill:#34a853" />
+    </g>
+  </g>
+</svg>
