@@ -1,5 +1,18 @@
 {
   "blogs": [
-   
+    {
+      "title": "SEO vs. Social Media: The Ultimate Guide for Small Businesses",
+      "description": "SEO or Social Media? Learn which platform fits your small business. Discover the pros, cons, and a hybrid strategy to grow your brand and drive traffic.",
+      "image_path": "https://timbakaran.in/blogs/1/digital-marketing-common-mistakes-overwhelmed-business-owner.webp",
+      "blog_url": "https://timbakaran.in/blogs/seo-vs-social-media.html",
+      "rank": 1
+    },
+    {
+      "title": "How to Conduct a Competitor Analysis for Free",
+      "description": "Learn how to do Competitor Analysis for Free, find their keywords, analyze their marketing strategies using free tools like Google, Meta Ad Library, and more.",
+      "image_path": "https://timbakaran.in/blogs/2/free-competitor-analysis-strategies-header.webp",
+      "blog_url": "https://timbakaran.in/blogs/free-competitor-analysis-strategies.html",
+      "rank": 2
+    }
   ]
 }
