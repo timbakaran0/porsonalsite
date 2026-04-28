@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO vs Social Media — LinkedIn Carousel</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #E0E0E0;
+    font-family: 'Barlow', sans-serif;
+    padding: 48px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  /* ── Slide Shell ─────────────────────────────── */
+  .slide {
+    width: 480px;
+    height: 600px;
+    background: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.08);
+    flex-shrink: 0;
+  }
+
+  /* ── Slide number badge ───────────────────────── */
+  .badge {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #E63946;
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10;
+  }
+
+  /* ── Author strip ─────────────────────────────── */
+  .author-strip {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 44px;
+    background: #1A1A1A;
+    display: flex; align-items: center;
+    padding: 0 24px;
+    gap: 10px;
+  }
+  .author-strip .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #E63946;
+    flex-shrink: 0;
+  }
+  .author-strip span {
+    font-family: 'Barlow', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .author-strip .li-icon {
+    margin-left: auto;
+    color: #0A66C2;
+    font-size: 16px;
+    font-weight: 900;
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: -0.5px;
+  }
+
+  /* ── Red accent bar ───────────────────────────── */
+  .accent-bar {
+    height: 6px;
+    background: #E63946;
+  }
+
+  /* ── Top label ────────────────────────────────── */
+  .top-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E63946;
+  }
+
+  /* ═══════════════════════════════════════════════
+     SLIDE 1 — HOOK
+  ═══════════════════════════════════════════════ */
+  .s1 { display: flex; flex-direction: column; }
+  .s1 .accent-bar { }
+  .s1 .body {
+    flex: 1;
+    padding: 36px 32px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .s1 .eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #E63946;
+    margin-bottom: 18px;
+  }
+  .s1 h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 62px;
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+  .s1 h1 span { color: #E63946; }
+  .s1 .divider {
+    width: 48px; height: 4px;
+    background: #E63946;
+    margin-bottom: 20px;
+  }
+  .s1 .subtitle {
+    font-size: 17px;
+    font-weight: 400;
+    color: #444;
+    line-height: 1.5;
+    max-width: 320px;
+  }
+  .s1 .hook-tag {
+    display: inline-block;
+    margin-top: 24px;
+    background: #1A1A1A;
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 2px;
+  }
+  /* large BG number */
+  .s1 .bg-num {
+    position: absolute;
+    right: -10px;
+    bottom: 50px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 200px;
+    line-height: 1;
+    color: rgba(230,57,70,0.06);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ═══════════════════════════════════════════════
+     SLIDE 2 — THE CORE DIFFERENCE
+  ═══════════════════════════════════════════════ */
+  .s2 { display: flex; flex-direction: column; }
+  .s2 .body {
+    flex: 1;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+  .s2 .eyebrow { margin-bottom: 16px; }
+  .s2 h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 38px;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: #1A1A1A;
+    letter-spacing: -0.5px;
+    margin-bottom: 28px;
+  }
+  .s2 .versus-wrap {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+  }
+  .versus-card {
+    flex: 1;
+    padding: 20px 18px;
+    border: 2px solid #1A1A1A;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .versus-card.red {
+    background: #E63946;
+    border-color: #E63946;
+  }
+  .versus-card .vc-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fff;
+  }
+  .versus-card:not(.red) .vc-label { color: #E63946; }
+  .versus-card .vc-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .versus-card:not(.red) .vc-title { color: #1A1A1A; }
+  .versus-card .vc-desc {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.85);
+    margin-top: 4px;
+  }
+  .versus-card:not(.red) .vc-desc { color: #555; }
+  .vs-badge {
+    width: 36px;
+    align-self: center;
+    flex-shrink: 0;
+    text-align: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: #1A1A1A;
+  }
+  .s2 .insight-box {
+    margin-top: 18px;
+    background: #1A1A1A;
+    color: #fff;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    border-left: 4px solid #E63946;
+  }
+  .s2 .insight-box strong { color: #E63946; }
+
+  /* ═══════════════════════════════════════════════
+     SLIDE 3 — SEO
+  ═══════════════════════════════════════════════ */
+  .s3 { display: flex; flex-direction: column; }
+  .s3 .head-band {
+    background: #1A1A1A;
+    padding: 26px 32px 22px;
+  }
+  .s3 .head-band .eyebrow { color: #E63946; margin-bottom: 8px; }
+  .s3 .head-band h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 42px;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.5px;
+  }
+  .s3 .head-band h2 span { color: #E63946; }
+  .s3 .body {
+    flex: 1;
+    padding: 28px 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .point-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .point-num {
+    width: 32px;
+    height: 32px;
+    background: #E63946;
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .point-text { flex: 1; }
+  .point-text strong {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    letter-spacing: 0.03em;
+    margin-bottom: 3px;
+  }
+  .point-text span {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.45;
+  }
+
+  /* ═══════════════════════════════════════════════
+     SLIDE 4 — SOCIAL MEDIA
+  ═══════════════════════════════════════════════ */
+  .s4 { display: flex; flex-direction: column; }
+  .s4 .head-band {
+    background: #E63946;
+    padding: 26px 32px 22px;
+  }
+  .s4 .head-band .eyebrow { color: #fff; opacity: 0.7; margin-bottom: 8px; }
+  .s4 .head-band h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 42px;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.5px;
+  }
+  .s4 .head-band h2 span { color: #1A1A1A; }
+  .s4 .body {
+    flex: 1;
+    padding: 28px 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .s4 .point-num { background: #1A1A1A; }
+
+  /* warning box for content treadmill */
+  .warn-box {
+    background: #fff3f4;
+    border: 2px solid #E63946;
+    padding: 14px 18px;
+    margin-top: 6px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .warn-box .warn-icon {
+    font-size: 18px; flex-shrink: 0; margin-top: 1px;
+  }
+  .warn-box p {
+    font-size: 13px;
+    color: #1A1A1A;
+    line-height: 1.45;
+    font-weight: 400;
+  }
+  .warn-box p strong { color: #E63946; }
+
+  /* ═══════════════════════════════════════════════
+     SLIDE 5 — HEAD TO HEAD
+  ═══════════════════════════════════════════════ */
+  .s5 { display: flex; flex-direction: column; }
+  .s5 .body {
+    flex: 1;
+    padding: 28px 32px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .s5 .eyebrow { margin-bottom: 10px; }
+  .s5 h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 34px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    letter-spacing: -0.3px;
+    margin-bottom: 22px;
+    line-height: 1.05;
+  }
+  .compare-table { width: 100%; border-collapse: collapse; }
+  .compare-table thead tr th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 8px 12px;
+  }
+  .compare-table thead tr th:first-child { text-align: left; color: #888; }
+  .compare-table thead tr th.col-seo {
+    background: #1A1A1A;
+    color: #fff;
+    text-align: center;
+    width: 120px;
+  }
+  .compare-table thead tr th.col-smm {
+    background: #E63946;
+    color: #fff;
+    text-align: center;
+    width: 120px;
+  }
+  .compare-table tbody tr td {
+    padding: 10px 12px;
+    font-size: 13px;
+    border-bottom: 1px solid #EBEBEB;
+    vertical-align: top;
+    line-height: 1.35;
+  }
+  .compare-table tbody tr td:first-child {
+    font-weight: 600;
+    color: #1A1A1A;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .compare-table tbody tr td:nth-child(2) {
+    text-align: center;
+    color: #444;
+    background: #f7f7f7;
+  }
+  .compare-table tbody tr td:nth-child(3) {
+    text-align: center;
+    color: #444;
+    background: #fff3f4;
+  }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+
+  /* ═══════════════════════════════════════════════
+     SLIDE 6 — THE STRATEGY
+  ═══════════════════════════════════════════════ */
+  .s6 { display: flex; flex-direction: column; }
+  .s6 .head-band {
+    background: #1A1A1A;
+    padding: 24px 32px;
+  }
+  .s6 .head-band .eyebrow { color: #E63946; margin-bottom: 8px; }
+  .s6 .head-band h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 38px;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+  }
+  .s6 .head-band h2 em {
+    color: #E63946;
+    font-style: normal;
+  }
+  .s6 .body {
+    flex: 1;
+    padding: 24px 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .strategy-card {
+    padding: 16px 18px;
+    border-left: 4px solid;
+    background: #f9f9f9;
+  }
+  .strategy-card.seo-card { border-color: #1A1A1A; }
+  .strategy-card.smm-card { border-color: #E63946; }
+  .strategy-card .sc-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 6px;
+  }
+  .strategy-card.seo-card .sc-label { color: #1A1A1A; }
+  .strategy-card.smm-card .sc-label { color: #E63946; }
+  .strategy-card .sc-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    margin-bottom: 4px;
+    line-height: 1.1;
+  }
+  .strategy-card .sc-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.45;
+  }
+  .split-pill {
+    display: flex;
+    height: 44px;
+    border-radius: 2px;
+    overflow: hidden;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .split-pill .s-left {
+    background: #1A1A1A;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    width: 70%;
+  }
+  .split-pill .s-right {
+    background: #E63946;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex: 1;
+  }
+
+  /* ═══════════════════════════════════════════════
+     SLIDE 7 — MISTAKES
+  ═══════════════════════════════════════════════ */
+  .s7 { display: flex; flex-direction: column; }
+  .s7 .head-band {
+    background: #E63946;
+    padding: 24px 32px;
+  }
+  .s7 .head-band .eyebrow { color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+  .s7 .head-band h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: -0.3px;
+  }
+  .s7 .body {
+    flex: 1;
+    padding: 24px 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .mistake-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .mistake-x {
+    width: 32px;
+    height: 32px;
+    background: #fff3f4;
+    border: 2px solid #E63946;
+    border-radius: 2px;
+    color: #E63946;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .mistake-text .mt-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    letter-spacing: 0.03em;
+    margin-bottom: 3px;
+  }
+  .mistake-text .mt-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.45;
+  }
+
+  /* ═══════════════════════════════════════════════
+     SLIDE 8 — HYBRID WORKFLOW
+  ═══════════════════════════════════════════════ */
+  .s8 { display: flex; flex-direction: column; }
+  .s8 .head-band {
+    background: #1A1A1A;
+    padding: 24px 32px;
+  }
+  .s8 .head-band .eyebrow { color: #E63946; margin-bottom: 8px; }
+  .s8 .head-band h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: -0.3px;
+  }
+  .s8 .body {
+    flex: 1;
+    padding: 24px 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .flow-step {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    margin-bottom: 0;
+  }
+  .flow-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
+    flex-shrink: 0;
+  }
+  .flow-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #E63946;
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .flow-line {
+    width: 2px;
+    flex: 1;
+    background: #E0E0E0;
+    margin: 4px 0;
+    min-height: 16px;
+  }
+  .flow-content {
+    flex: 1;
+    padding: 0 0 18px 14px;
+    padding-top: 4px;
+  }
+  .flow-content .fc-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .flow-content .fc-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.45;
+  }
+  .flow-content .fc-desc span {
+    display: inline-block;
+    background: #E63946;
+    color: #fff;
+    font-size: 11px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-right: 4px;
+    margin-bottom: 3px;
+  }
+  .tagline-box {
+    margin-top: 4px;
+    border: 2px solid #1A1A1A;
+    padding: 12px 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1A1A1A;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+  .tagline-box em {
+    color: #E63946;
+    font-style: normal;
+  }
+
+  /* ═══════════════════════════════════════════════
+     SLIDE 9 — CTA
+  ═══════════════════════════════════════════════ */
+  .s9 { display: flex; flex-direction: column; }
+  .s9 .accent-bar { height: 8px; }
+  .s9 .body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    text-align: center;
+  }
+  .s9 .cta-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #E63946;
+    margin-bottom: 16px;
+  }
+  .s9 h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    line-height: 0.95;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+  .s9 h2 span { color: #E63946; }
+  .s9 .cta-divider {
+    width: 56px; height: 4px;
+    background: #E63946;
+    margin: 0 auto 20px;
+  }
+  .s9 .cta-body {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.6;
+    max-width: 320px;
+    margin-bottom: 28px;
+  }
+  .s9 .cta-btn {
+    display: inline-block;
+    background: #0A66C2;
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 14px 36px;
+    border-radius: 2px;
+    text-decoration: none;
+    margin-bottom: 16px;
+  }
+  .s9 .cta-handle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #888;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .s9 .cta-handle strong { color: #1A1A1A; }
+  .s9 .bg-text {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 100px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -2px;
+  }
+
+  /* ── Print / PDF rules ───────────────────────── */
+  @media print {
+    body { background: #E0E0E0; padding: 0; gap: 0; }
+    .slide { page-break-after: always; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+  SLIDE 1 — HOOK
+═══════════════════════════════════════════════ -->
+<div class="slide s1">
+  <div class="accent-bar"></div>
+  <div class="body">
+    <div class="eyebrow">Digital Marketing · Small Business</div>
+    <h1>SEO<br><span>vs</span><br>Social<br>Media</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Most small businesses are wasting their first 50 hours. Here's the truth.</p>
+    <div class="hook-tag">7 Slides That Will Save You Months →</div>
+  </div>
+  <div class="bg-num">?</div>
+  <div class="badge">1</div>
+  <div class="author-strip">
+    <div class="dot"></div>
+    <span>Karan Timba · timbakaran.in</span>
+    <div class="li-icon">in</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  SLIDE 2 — CORE DIFFERENCE
+═══════════════════════════════════════════════ -->
+<div class="slide s2">
+  <div class="accent-bar"></div>
+  <div class="body">
+    <div class="top-label eyebrow">The Fundamental Difference</div>
+    <h2>Intent vs.<br>Discovery</h2>
+    <div class="versus-wrap">
+      <div class="versus-card red">
+        <div class="vc-label">SEO</div>
+        <div class="vc-title">Captures<br>Demand</div>
+        <div class="vc-desc">User has a problem. They're actively searching for your solution right now.</div>
+      </div>
+      <div class="vs-badge">VS</div>
+      <div class="versus-card">
+        <div class="vc-label">Social</div>
+        <div class="vc-title">Creates<br>Demand</div>
+        <div class="vc-desc">User is scrolling. Your content interrupts them and plants the idea.</div>
+      </div>
+    </div>
+    <div class="insight-box">
+      <strong>Key insight:</strong> SEO = high intent. Social = high reach. Neither is wrong — they solve different problems.
+    </div>
+  </div>
+  <div class="badge">2</div>
+  <div class="author-strip">
+    <div class="dot"></div>
+    <span>Karan Timba · timbakaran.in</span>
+    <div class="li-icon">in</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  SLIDE 3 — SEO
+═══════════════════════════════════════════════ -->
+<div class="slide s3">
+  <div class="head-band">
+    <div class="eyebrow">Long-Term Play</div>
+    <h2>SEO:<br>The <span>Asset</span><br>That Compounds</h2>
+  </div>
+  <div class="body">
+    <div class="point-row">
+      <div class="point-num">1</div>
+      <div class="point-text">
+        <strong>Compounding Returns</strong>
+        <span>One great blog post can drive leads for 3–5 years. Zero ongoing cost.</span>
+      </div>
+    </div>
+    <div class="point-row">
+      <div class="point-num">2</div>
+      <div class="point-text">
+        <strong>Higher Conversion Rate</strong>
+        <span>Searchers are ready to buy. They come to you, not the other way around.</span>
+      </div>
+    </div>
+    <div class="point-row">
+      <div class="point-num">3</div>
+      <div class="point-text">
+        <strong>Local SEO = Secret Weapon</strong>
+        <span>Google My Business alone beats Instagram for local service businesses.</span>
+      </div>
+    </div>
+    <div class="point-row">
+      <div class="point-num">4</div>
+      <div class="point-text">
+        <strong>You Own the Traffic</strong>
+        <span>No algorithm changes can wipe out your Google rankings overnight.</span>
+      </div>
+    </div>
+  </div>
+  <div class="badge">3</div>
+  <div class="author-strip">
+    <div class="dot"></div>
+    <span>Karan Timba · timbakaran.in</span>
+    <div class="li-icon">in</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  SLIDE 4 — SOCIAL MEDIA
+═══════════════════════════════════════════════ -->
+<div class="slide s4">
+  <div class="head-band">
+    <div class="eyebrow">Instant Connection</div>
+    <h2>Social Media:<br>The <span>Human</span> Face<br>of Your Brand</h2>
+  </div>
+  <div class="body">
+    <div class="point-row">
+      <div class="point-num">1</div>
+      <div class="point-text">
+        <strong>Instant Feedback</strong>
+        <span>Post a poll today. Know what your customers want by tonight.</span>
+      </div>
+    </div>
+    <div class="point-row">
+      <div class="point-num">2</div>
+      <div class="point-text">
+        <strong>Viral Potential</strong>
+        <span>One Reel can reach thousands overnight. SEO simply can't do that.</span>
+      </div>
+    </div>
+    <div class="point-row">
+      <div class="point-num">3</div>
+      <div class="point-text">
+        <strong>Brand Trust (E-E-A-T)</strong>
+        <span>BTS content builds the "T" in Trust. People buy from people.</span>
+      </div>
+    </div>
+    <div class="warn-box">
+      <div class="warn-icon">⚠</div>
+      <p><strong>The Treadmill Risk:</strong> Stop posting and your reach drops to zero. You don't own your followers — the platform does.</p>
+    </div>
+  </div>
+  <div class="badge">4</div>
+  <div class="author-strip">
+    <div class="dot"></div>
+    <span>Karan Timba · timbakaran.in</span>
+    <div class="li-icon">in</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  SLIDE 5 — HEAD-TO-HEAD
+═══════════════════════════════════════════════ -->
+<div class="slide s5">
+  <div class="accent-bar"></div>
+  <div class="body">
+    <div class="top-label eyebrow">The Numbers Don't Lie</div>
+    <h2>Head-to-Head<br>Comparison</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="col-seo">SEO</th>
+          <th class="col-smm">Social</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Speed</td>
+          <td>3–6 months</td>
+          <td>Minutes/Days</td>
+        </tr>
+        <tr>
+          <td>Lifespan</td>
+          <td>Years</td>
+          <td>Hours/Days</td>
+        </tr>
+        <tr>
+          <td>Intent</td>
+          <td>Transactional</td>
+          <td>Casual</td>
+        </tr>
+        <tr>
+          <td>Effort</td>
+          <td>Technical + Writing</td>
+          <td>Creative + Visual</td>
+        </tr>
+        <tr>
+          <td>Ownership</td>
+          <td>You own it</td>
+          <td>Platform owns it</td>
+        </tr>
+        <tr>
+          <td>Best For</td>
+          <td>Services / B2B</td>
+          <td>Products / Brands</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="badge">5</div>
+  <div class="author-strip">
+    <div class="dot"></div>
+    <span>Karan Timba · timbakaran.in</span>
+    <div class="li-icon">in</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  SLIDE 6 — STRATEGY (70/30)
+═══════════════════════════════════════════════ -->
+<div class="slide s6">
+  <div class="head-band">
+    <div class="eyebrow">The Action Plan</div>
+    <h2>Stop Choosing.<br>Use the <em>70/30 Split.</em></h2>
+  </div>
+  <div class="body">
+    <div class="strategy-card seo-card">
+      <div class="sc-label">Service Business · Gym, Agency, Plumber</div>
+      <div class="sc-title">SEO First (70%) · Social for Proof (30%)</div>
+      <div class="sc-desc">Nobody opens Instagram to find a plumber. Build your Google presence first. Use social only to show you're real and active.</div>
+    </div>
+    <div class="strategy-card smm-card">
+      <div class="sc-label">Product Business · Clothing, Gadgets, Food</div>
+      <div class="sc-title">Social First (70%) · SEO for Brand (30%)</div>
+      <div class="sc-desc">People buy clothes because they look great on video. Focus on reels + micro-influencers. SEO just ensures your brand name ranks.</div>
+    </div>
+    <div class="split-pill">
+      <div class="s-left">SEO 70%</div>
+      <div class="s-right">SMM 30%</div>
+    </div>
+  </div>
+  <div class="badge">6</div>
+  <div class="author-strip">
+    <div class="dot"></div>
+    <span>Karan Timba · timbakaran.in</span>
+    <div class="li-icon">in</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  SLIDE 7 — MISTAKES
+═══════════════════════════════════════════════ -->
+<div class="slide s7">
+  <div class="head-band">
+    <div class="eyebrow">Avoid These Traps</div>
+    <h2>3 Mistakes That<br>Kill Small Businesses<br>Online</h2>
+  </div>
+  <div class="body">
+    <div class="mistake-row">
+      <div class="mistake-x">✕</div>
+      <div class="mistake-text">
+        <div class="mt-title">The Ghost Town Website</div>
+        <div class="mt-desc">Pouring everything into Instagram while your site takes 20 seconds to load. That bio link is costing you customers every day.</div>
+      </div>
+    </div>
+    <div class="mistake-row">
+      <div class="mistake-x">✕</div>
+      <div class="mistake-text">
+        <div class="mt-title">Ignoring Search Intent</div>
+        <div class="mt-desc">"History of Gyms" gets no leads. "Join a Gym in Rajkot" gets customers. Write for buyers, not historians.</div>
+      </div>
+    </div>
+    <div class="mistake-row">
+      <div class="mistake-x">✕</div>
+      <div class="mistake-text">
+        <div class="mt-title">Being Everywhere at Once</div>
+        <div class="mt-desc">Twitter + LinkedIn + Instagram + TikTok + Pinterest. Pick ONE platform. Master it before expanding.</div>
+      </div>
+    </div>
+  </div>
+  <div class="badge">7</div>
+  <div class="author-strip">
+    <div class="dot"></div>
+    <span>Karan Timba · timbakaran.in</span>
+    <div class="li-icon">in</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  SLIDE 8 — HYBRID WORKFLOW
+═══════════════════════════════════════════════ -->
+<div class="slide s8">
+  <div class="head-band">
+    <div class="eyebrow">The Pro Move</div>
+    <h2>The Hybrid Workflow:<br>1 Piece of Content,<br>Maximum Reach</h2>
+  </div>
+  <div class="body">
+    <div class="flow-step">
+      <div class="flow-left">
+        <div class="flow-circle">1</div>
+        <div class="flow-line"></div>
+      </div>
+      <div class="flow-content">
+        <div class="fc-title">Write the Core Asset</div>
+        <div class="fc-desc">A 1200-word blog post for your website. This is your <strong>SEO Foundation.</strong></div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-left">
+        <div class="flow-circle">2</div>
+        <div class="flow-line"></div>
+      </div>
+      <div class="flow-content">
+        <div class="fc-title">Break it Down for Social</div>
+        <div class="fc-desc">
+          <span>LinkedIn</span> Comparison table post<br>
+          <span>Instagram</span> 5-tip carousel<br>
+          <span>YouTube</span> 60-sec Short summary
+        </div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-left">
+        <div class="flow-circle">3</div>
+      </div>
+      <div class="flow-content">
+        <div class="fc-title">Always Link Back</div>
+        <div class="fc-desc">Every post drives traffic back to your website. Social feeds the house.</div>
+      </div>
+    </div>
+    <div class="tagline-box">
+      SEO is your <em>house.</em><br>
+      Social Media is the <em>road</em> that leads to it.
+    </div>
+  </div>
+  <div class="badge">8</div>
+  <div class="author-strip">
+    <div class="dot"></div>
+    <span>Karan Timba · timbakaran.in</span>
+    <div class="li-icon">in</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  SLIDE 9 — CTA
+═══════════════════════════════════════════════ -->
+<div class="slide s9">
+  <div class="accent-bar"></div>
+  <div class="body">
+    <div class="cta-eyebrow">Found this useful?</div>
+    <h2>Save This.<br><span>Share</span> This.<br>Grow With It.</h2>
+    <div class="cta-divider"></div>
+    <p class="cta-body">
+      More frameworks like this every week — for small business owners who want to grow smart, not just busy.
+    </p>
+    <a class="cta-btn" href="https://www.linkedin.com/in/karantimba/">Follow on LinkedIn</a>
+    <div class="cta-handle">
+      Read the full guide → <strong>timbakaran.in</strong>
+    </div>
+  </div>
+  <div class="bg-text">Grow</div>
+  <div class="badge">9</div>
+  <div class="author-strip">
+    <div class="dot"></div>
+    <span>Karan Timba · timbakaran.in</span>
+    <div class="li-icon">in</div>
+  </div>
+</div>
+
+</body>
+</html>
