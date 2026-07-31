@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player | Karan Timba</title>
+    
+    <!-- Branding & SEO Meta Tags -->
+    <meta name="description" content="Local web-based video player built by Karan Timba.">
+    <meta name="author" content="Karan Timba">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://timbakaran.in/player" />
+    
+    <!-- Open Graph & Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://timbakaran.in/player">
+    <meta property="og:title" content="Video Player | Karan Timba">
+    <meta property="og:description" content="Local web-based video player built by Karan Timba.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Video Player | Karan Timba">
+    <meta name="twitter:description" content="Local web-based video player built by Karan Timba.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://timbakaran.in/assets/image/favicon.ico">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8K1QQVTKN7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-8K1QQVTKN7');
+    </script>
+
+    <style>
+        /* Base Theme */
+        :root {
+            --bg-dark: #121212; /* Back to comfortable dark background */
+            --bg-panel: #1e1e1e;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent: #ff4d4f; /* Using your custom red as the striking accent */
+            --accent-glow: rgba(255, 77, 79, 0.15);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* --- Navigation & Header --- */
+        .hero-section {
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        /* Logo Styling */
+        .site-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--text-main);
+            transition: transform 0.2s ease;
+        }
+
+        .site-logo:hover {
+            transform: scale(1.02);
+        }
+
+        .site-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            object-fit: cover;
+        }
+
+        .site-logo .highlight {
+            color: var(--accent);
+        }
+
+        .menu-button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.2s;
+        }
+        
+        .menu-button:hover {
+            color: var(--accent);
+        }
+
+        .social-links-top, .social-links-bottom {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-links-top a, .social-links-bottom a {
+            color: white;
+            font-size: 20px;
+            transition: all 0.2s;
+        }
+
+        .social-links-top a:hover, .social-links-bottom a:hover {
+            transform: translateY(-3px);
+            color: var(--accent);
+        }
+
+        .x-icon {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+        }
+
+        /* Slide-in Menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 250px;
+            height: 100vh;
+            background: var(--bg-panel);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 30px 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+        }
+
+        .nav-menu.open {
+            left: 0;
+        }
+
+        .close-menu {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            float: right;
+            transition: color 0.2s;
+        }
+        
+        .close-menu:hover {
+            color: var(--accent);
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 60px;
+        }
+
+        .nav-menu ul li {
+            margin-bottom: 20px;
+        }
+
+        .nav-menu ul li a {
+            font-size: 18px;
+            transition: color 0.2s;
+        }
+
+        .nav-menu ul li a:hover {
+            color: var(--accent);
+        }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+            display: none;
+        }
+        
+        .nav-overlay.active {
+            display: block;
+        }
+
+        /* --- Page Titles --- */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero-title {
+            font-size: 36px;
+            margin: 0 0 10px 0;
+            color: white;
+        }
+
+        /* --- Player Section --- */
+        .player-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding-bottom: 60px;
+            flex-grow: 1;
+        }
+
+        .header-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: var(--bg-panel);
+            padding: 15px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 1000px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        input[type="file"] { display: none; }
+        
+        .custom-file-upload {
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .custom-file-upload:hover { 
+            background: var(--accent-glow); 
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .player-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        video {
+            width: 100%;
+            display: block;
+            background: #000;
+        }
+
+        /* On Screen Display */
+        .osd {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 77, 79, 0.3);
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--bg-panel);
+        }
+
+        .progress-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="range"] {
+            flex-grow: 1;
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+
+        .btn-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .controls button, .controls select {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .controls button:hover, .controls select:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .time-display, .speed-display {
+            font-size: 14px;
+            font-family: monospace;
+        }
+
+        .speed-display {
+            padding: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            cursor: ns-resize;
+            user-select: none;
+            transition: all 0.2s;
+        }
+        
+        .speed-display:hover { 
+            background: var(--accent-glow); 
+            color: var(--accent);
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        #volume-bar { width: 80px; }
+        select option { background: var(--bg-panel); color: white; }
+
+        /* --- Footer --- */
+        .footer-section {
+            background: var(--bg-panel);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: auto;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-title { margin-bottom: 15px; color: white; }
+        .footer-text { color: var(--text-muted); margin-bottom: 20px; }
+        .social-links-bottom { justify-content: center; margin-bottom: 20px; }
+        .email-link { 
+            color: white; 
+            font-weight: bold; 
+            transition: color 0.2s;
+        }
+        .email-link:hover { color: var(--accent); }
+        .copyright { color: var(--text-muted); font-size: 14px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Menu (Slide-in) -->
+    <nav class="nav-menu" id="navMenu">
+        <button class="close-menu" id="closeMenu" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="https://timbakaran.in">Home</a></li>
+            <li><a href="https://timbakaran.in/#about">About</a></li>
+            <li><a href="https://timbakaran.in/all-blogs.html">Blogs</a></li>
+            <li><a href="https://timbakaran.in/#skills">Skills</a></li>
+            <li><a href="https://timbakaran.in/#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Header Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="header-top">
+                <!-- Menu Button -->
+                <button class="menu-button" id="menuButton" aria-label="Open menu">
+                    <i class="fas fa-bars"></i>
+                    <span>Menu</span>
+                </button>
+
+                <!-- Centered Logo Integration -->
+                <a href="https://timbakaran.in" class="site-logo">
+                    <img src="https://timbakaran.in/assets/image/karan.webp" alt="Karan Timba">
+                    <span>Karan <span class="highlight">Timba</span></span>
+                </a>
+
+                <!-- Social Links -->
+                <div class="social-links-top">
+                    <a href="https://www.instagram.com/timba_karan_0077/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/TimbaKaran007" target="_blank" aria-label="X/Twitter"><img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/x-social-media-white-icon.png" alt="X" class="x-icon"></a>
+                    <a href="https://www.linkedin.com/in/karantimba/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="page-header">
+                <h1 class="hero-title">Video Player</h1>
+                <p style="color: var(--text-muted);">High-performance local playback ⚡ Zero uploads required</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Player Section -->
+    <section class="player-wrapper">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+            
+            <div class="header-controls">
+                <label for="video-upload" class="custom-file-upload">
+                    <i class="fas fa-folder-open"></i> Choose Video File
+                </label>
+                <input type="file" id="video-upload" accept="video/mp4,video/mkv,video/webm,video/ogg">
+            </div>
+
+            <div class="player-container" id="player-container">
+                <div class="osd" id="osd">Speed: 1.0x</div>
+                <video id="video-player"></video>
+                
+                <div class="controls">
+                    <div class="progress-container">
+                        <input type="range" id="seek-bar" value="0" min="0" step="0.1">
+                        <div class="time-display" id="time-display">00:00 / 00:00</div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button id="play-pause-btn" title="Space"><i class="fas fa-play"></i></button>
+                        <button id="skip-back-btn" title="Left Arrow"><i class="fas fa-backward"></i></button>
+                        <button id="skip-forward-btn" title="Right Arrow"><i class="fas fa-forward"></i></button>
+                    </div>
+
+                    <div class="volume-container">
+                        <button id="mute-btn" title="M"><i class="fas fa-volume-up"></i></button>
+                        <input type="range" id="volume-bar" min="0" max="1" step="0.05" value="1">
+                    </div>
+
+                    <!-- Native Track Selectors -->
+                    <div class="btn-group" style="margin-left: auto;">
+                        
+                        <select id="audio-track-select" title="Change Audio Track" style="display: none;">
+                            <option value="-1">Audio Track 1</option>
+                        </select>
+
+                        <!-- Using the Pen icon to signify text content -->
+                        <div id="sub-container" style="display: none; position: relative;">
+                            <select id="sub-track-select" title="Change Text/Subtitle Track" style="appearance: none; padding-left: 30px;">
+                                <option value="-1">Subtitles Off</option>
+                            </select>
+                            <i class="fas fa-pen" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; color: white; font-size: 12px;"></i>
+                        </div>
+
+                        <div class="speed-display" id="speed-display" title="Scroll mouse wheel to change speed">1.0x</div>
+                        <button id="pip-btn" title="Shortcut: I">PiP</button>
+                        <button id="fullscreen-btn" title="Shortcut: F"><i class="fas fa-expand"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer-section" id="contact">
+        <div class="container">
+            <h3 class="footer-title">Reach out to me here 👇</h3>
+            <p class="footer-text">
+                Feel free to ping me for volunteering 🔴 discussing your ideas 🔴 grabbing a cup of coffee.
+            </p>
+            <div class="social-links-bottom">
+                <a href="https://www.instagram.com/timba_karan_0077/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/TimbaKaran007" target="_blank" aria-label="X/Twitter">
+                    <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/x-social-media-white-icon.png" alt="X" class="x-icon" style="width:18px;">
+                </a>
+                <a href="https://www.linkedin.com/in/karantimba/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="email-links">
+                <a href="mailto:karantimba0@gmail.com" class="email-link">karantimba0@gmail.com</a>
+            </div>
+            <p class="copyright">Made with ❤️ by Timba Karan</p>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script>
+        // --- Navigation Menu Logic ---
+        const menuBtn = document.getElementById('menuButton');
+        const closeBtn = document.getElementById('closeMenu');
+        const navMenu = document.getElementById('navMenu');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function toggleMenu() {
+            navMenu.classList.toggle('open');
+            navOverlay.classList.toggle('active');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+
+
+        // --- Video Player Logic ---
+        const videoPlayer = document.getElementById('video-player');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const seekBar = document.getElementById('seek-bar');
+        const timeDisplay = document.getElementById('time-display');
+        const volumeBar = document.getElementById('volume-bar');
+        const muteBtn = document.getElementById('mute-btn');
+        const osd = document.getElementById('osd');
+        const speedDisplay = document.getElementById('speed-display');
+        const audioSelect = document.getElementById('audio-track-select');
+        const subSelect = document.getElementById('sub-track-select');
+        const subContainer = document.getElementById('sub-container');
+        
+        let osdTimeout;
+
+        // Global Focus Fix: Prevents buttons/inputs from holding focus so shortcuts work
+        function dropFocus() {
+            document.activeElement.blur();
+        }
+
+        document.querySelectorAll('button, input, select').forEach(el => {
+            el.addEventListener('click', () => { if(el.type !== 'range') dropFocus(); });
+            el.addEventListener('change', () => { if(el.type !== 'range') dropFocus(); });
+        });
+
+        // File Loading
+        document.getElementById('video-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                videoPlayer.src = URL.createObjectURL(file);
+                videoPlayer.play();
+                updatePlayState();
+            }
+        });
+
+        // Load Audio and Subtitle Tracks
+        videoPlayer.addEventListener('loadedmetadata', () => {
+            seekBar.max = videoPlayer.duration;
+            timeDisplay.textContent = `00:00 / ${formatTime(videoPlayer.duration)}`;
+            videoPlayer.playbackRate = 1.0;
+            speedDisplay.textContent = '1.0x';
+            loadTracks();
+        });
+
+        function loadTracks() {
+            // Audio Tracks
+            if (videoPlayer.audioTracks && videoPlayer.audioTracks.length > 1) {
+                audioSelect.style.display = 'block';
+                audioSelect.innerHTML = '';
+                for (let i = 0; i < videoPlayer.audioTracks.length; i++) {
+                    let track = videoPlayer.audioTracks[i];
+                    let option = document.createElement('option');
+                    option.value = i;
+                    option.text = track.label || track.language || `Audio Track ${i + 1}`;
+                    if (track.enabled) option.selected = true;
+                    audioSelect.appendChild(option);
+                }
+            } else {
+                audioSelect.style.display = 'none';
+            }
+
+            // Text/Subtitle Tracks
+            if (videoPlayer.textTracks && videoPlayer.textTracks.length > 0) {
+                subContainer.style.display = 'block';
+                subSelect.innerHTML = '<option value="-1">Subtitles Off</option>';
+                for (let i = 0; i < videoPlayer.textTracks.length; i++) {
+                    let track = videoPlayer.textTracks[i];
+                    let option = document.createElement('option');
+                    option.value = i;
+                    option.text = `${track.label || track.language || `Subtitle ${i + 1}`}`;
+                    if (track.mode === 'showing') option.selected = true;
+                    subSelect.appendChild(option);
+                }
+            } else {
+                subContainer.style.display = 'none';
+            }
+        }
+
+        audioSelect.addEventListener('change', (e) => {
+            const index = parseInt(e.target.value);
+            for (let i = 0; i < videoPlayer.audioTracks.length; i++) {
+                videoPlayer.audioTracks[i].enabled = (i === index);
+            }
+            showOSD("Audio Track Changed");
+        });
+
+        subSelect.addEventListener('change', (e) => {
+            const index = parseInt(e.target.value);
+            for (let i = 0; i < videoPlayer.textTracks.length; i++) {
+                videoPlayer.textTracks[i].mode = (i === index) ? 'showing' : 'hidden';
+            }
+            showOSD(index === -1 ? "Subtitles Off" : "Subtitle Track Changed");
+        });
+
+        // Mouse Wheel Speed Control
+        speedDisplay.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (e.deltaY < 0) {
+                changeSpeed(0.1); 
+            } else {
+                changeSpeed(-0.1); 
+            }
+        });
+
+        // Playback Controls
+        function togglePlay() {
+            videoPlayer.paused ? videoPlayer.play() : videoPlayer.pause();
+            updatePlayState();
+        }
+        
+        function updatePlayState() {
+            playPauseBtn.innerHTML = videoPlayer.paused ? '<i class="fas fa-play"></i>' : '<i class="fas fa-pause"></i>';
+            showOSD(videoPlayer.paused ? 'Paused' : 'Play');
+        }
+
+        playPauseBtn.addEventListener('click', togglePlay);
+        videoPlayer.addEventListener('click', togglePlay);
+
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (document.activeElement.tagName === 'INPUT' && document.activeElement.type !== 'range') return;
+
+            const prevent = ['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'f', 'o', 'p', 'k', 'l', 'i', 'm'];
+            if (prevent.includes(e.key) || prevent.includes(e.code)) e.preventDefault();
+
+            switch(e.key.toLowerCase()) {
+                case ' ': togglePlay(); break;
+                case 'f': toggleFullscreen(); break;
+                case 'arrowright': skip(10); break;
+                case 'arrowleft': skip(-10); break;
+                case 'arrowup': changeVolume(0.1); break;
+                case 'arrowdown': changeVolume(-0.1); break;
+                case 'o': changeSpeed(-0.5); break;
+                case 'p': changeSpeed(0.5); break;
+                case 'k': changeSpeed(-0.1); break;
+                case 'l': changeSpeed(0.1); break;
+                case 'i': togglePiP(); break;
+                case 'm': toggleMute(); break;
+            }
+        });
+
+        function skip(amount) {
+            videoPlayer.currentTime += amount;
+            showOSD(`Skip ${amount > 0 ? '+' : ''}${amount}s`);
+        }
+
+        function changeVolume(amount) {
+            let newVol = Math.max(0, Math.min(1, videoPlayer.volume + amount));
+            videoPlayer.volume = newVol;
+            volumeBar.value = newVol;
+            muteBtn.innerHTML = newVol === 0 ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+            showOSD(`Volume: ${Math.round(newVol * 100)}%`);
+        }
+
+        function toggleMute() {
+            if (videoPlayer.volume > 0) {
+                videoPlayer.dataset.lastVol = videoPlayer.volume;
+                videoPlayer.volume = 0;
+                volumeBar.value = 0;
+            } else {
+                videoPlayer.volume = videoPlayer.dataset.lastVol || 1;
+                volumeBar.value = videoPlayer.volume;
+            }
+            muteBtn.innerHTML = videoPlayer.volume == 0 ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+            showOSD(videoPlayer.volume == 0 ? 'Muted' : 'Unmuted');
+        }
+
+        function changeSpeed(amount) {
+            let newSpeed = Math.round((videoPlayer.playbackRate + amount) * 10) / 10;
+            newSpeed = Math.max(0.1, Math.min(5, newSpeed)); 
+            videoPlayer.playbackRate = newSpeed;
+            speedDisplay.textContent = `${newSpeed.toFixed(1)}x`;
+            showOSD(`Speed: ${newSpeed.toFixed(1)}x`);
+        }
+
+        function toggleFullscreen() {
+            const container = document.getElementById('player-container');
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().catch(err => console.log(err));
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        async function togglePiP() {
+            if (document.pictureInPictureElement) {
+                await document.exitPictureInPicture();
+            } else if (document.pictureInPictureEnabled) {
+                await videoPlayer.requestPictureInPicture();
+            }
+        }
+
+        function showOSD(text) {
+            osd.textContent = text;
+            osd.style.opacity = 1;
+            clearTimeout(osdTimeout);
+            osdTimeout = setTimeout(() => { osd.style.opacity = 0; }, 1500);
+        }
+
+        document.getElementById('skip-back-btn').addEventListener('click', () => skip(-10));
+        document.getElementById('skip-forward-btn').addEventListener('click', () => skip(10));
+        document.getElementById('fullscreen-btn').addEventListener('click', toggleFullscreen);
+        document.getElementById('pip-btn').addEventListener('click', togglePiP);
+        document.getElementById('mute-btn').addEventListener('click', toggleMute);
+
+        volumeBar.addEventListener('input', (e) => {
+            videoPlayer.volume = e.target.value;
+            muteBtn.innerHTML = e.target.value == 0 ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+        });
+
+        videoPlayer.addEventListener('timeupdate', () => {
+            seekBar.value = videoPlayer.currentTime;
+            timeDisplay.textContent = `${formatTime(videoPlayer.currentTime)} / ${formatTime(videoPlayer.duration)}`;
+        });
+
+        seekBar.addEventListener('input', () => {
+            videoPlayer.currentTime = seekBar.value;
+        });
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = Math.floor(seconds % 60);
+            if (h > 0) return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>
